@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Orders Management | Precision Atelier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "inverse-on-surface": "#eff1f3",
+                        "background": "#f7f9fb",
+                        "surface-tint": "#005ac2",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#556479",
+                        "on-primary-fixed": "#001a42",
+                        "primary-container": "#2170e4",
+                        "primary-fixed": "#d8e2ff",
+                        "primary-fixed-dim": "#adc6ff",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-bright": "#f7f9fb",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-background": "#191c1e",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#00855b",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#424754",
+                        "surface-container-high": "#e6e8ea",
+                        "on-secondary-fixed": "#0c1c2f",
+                        "secondary-fixed-dim": "#b8c8e0",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#004395",
+                        "surface-dim": "#d8dadc",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-container": "#fefcff",
+                        "on-tertiary-fixed": "#002113",
+                        "on-secondary-fixed-variant": "#39485c",
+                        "secondary-container": "#d1e1fa",
+                        "primary": "#0058be",
+                        "outline": "#727785",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface": "#f7f9fb",
+                        "tertiary": "#006947",
+                        "on-tertiary-container": "#f5fff6",
+                        "outline-variant": "#c2c6d6",
+                        "secondary-fixed": "#d4e4fd",
+                        "secondary": "#505f75",
+                        "inverse-primary": "#adc6ff",
+                        "surface-container": "#eceef0",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar (Shared Component) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#1E2D40] flex flex-col py-8 z-50">
+<div class="px-6 mb-10">
+<h2 class="text-xl font-bold tracking-tight text-white">Precision Atelier</h2>
+<p class="text-xs text-slate-400 mt-1 uppercase tracking-widest">Inventory Admin</p>
+</div>
+<nav class="flex-grow">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white transition-colors group" href="index.html">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white transition-colors group" href="index2.html">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+<span class="font-medium">Inventory</span>
+</a>
+</li>
+<li>
+<!-- Active Navigation Logic: Orders screen -->
+<a class="flex items-center gap-3 px-6 py-3 text-white bg-primary-container/10 border-r-4 border-primary" href="index3.html">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+<span class="font-medium">Orders</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">bar_chart</span>
+<span class="font-medium">Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="mt-auto px-6 space-y-4">
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-white py-3 rounded-xl font-semibold text-sm shadow-lg hover:shadow-primary/20 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Order
+            </button>
+<div class="pt-6 border-t border-white/10">
+<a class="flex items-center gap-3 py-2 text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+<span class="text-sm font-medium">Support</span>
+</a>
+<a class="flex items-center gap-3 py-2 text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="text-sm font-medium">Log Out</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen pb-12">
+<!-- TopAppBar (Shared Component) -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-surface/80 backdrop-blur-md px-8 h-20 flex justify-between items-center">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-xl pl-10 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/60" placeholder="Search orders, customers, or SKUs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors relative">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-surface-variant">
+<div class="text-right">
+<p class="text-sm font-semibold text-on-surface">Alex Fischer</p>
+<p class="text-xs text-on-surface-variant">Operations Lead</p>
+</div>
+<img class="w-10 h-10 rounded-full object-cover border-2 border-surface-container-high" data-alt="Close-up portrait of a professional male operations manager with a warm smile in a brightly lit office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU2csM8ro0o5HK6wqUFB-zmzPvvaW8HS5PPjU3qSZqrnmE3ffBZeZMfJ5GDRJfhAnZaxjK47nPFb2uplf0bOaDpGEMwzbgJieoK5IhnNrwe25evVkwWcbKoBpZg99knMO1umqH3BEbNJbBlR2gremKSo2zvIBE4J2FTHLKIxIV2SGshDvbNfNbgLq-KBPCA-Ze3bR91FiW6M3C8bTiiiU-Y5Qo-wbauERYe7nCusbD4iNYw8Zn6llXEAgppEgY8Sh8nMVOQx4lJvBX"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="pt-28 px-8 max-w-7xl mx-auto">
+<!-- Hero Header Section -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h1 class="text-3xl font-extrabold tracking-tight text-on-surface mb-1">Orders Management</h1>
+<p class="text-on-surface-variant">Manage customer requests and track logistics across regions.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-lowest border border-outline-variant/30 text-on-surface font-medium rounded-xl hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-[20px]">file_download</span>
+                        Export
+                    </button>
+<button class="flex items-center gap-2 px-5 py-2.5 bg-primary text-white font-semibold rounded-xl shadow-md hover:bg-primary-container transition-all">
+<span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                        New Order
+                    </button>
+</div>
+</div>
+<!-- Summary Row (Bento Style Metrics) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-primary transition-all">
+<div class="flex items-center justify-between mb-4">
+<span class="text-on-surface-variant text-sm font-medium">Total Orders</span>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">shopping_bag</span>
+</div>
+<p class="text-3xl font-bold font-headline sku-data">1,284</p>
+<p class="text-xs text-tertiary font-medium mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                        +12.5% vs last month
+                    </p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-secondary-container transition-all">
+<div class="flex items-center justify-between mb-4">
+<span class="text-on-surface-variant text-sm font-medium">Pending Fulfillment</span>
+<span class="material-symbols-outlined text-secondary bg-secondary-container/30 p-2 rounded-lg">pending_actions</span>
+</div>
+<p class="text-3xl font-bold font-headline sku-data">42</p>
+<p class="text-xs text-on-surface-variant mt-2">Requires immediate attention</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-tertiary transition-all">
+<div class="flex items-center justify-between mb-4">
+<span class="text-on-surface-variant text-sm font-medium">Average Order Value</span>
+<span class="material-symbols-outlined text-tertiary bg-tertiary-fixed/30 p-2 rounded-lg">payments</span>
+</div>
+<p class="text-3xl font-bold font-headline sku-data">$482.50</p>
+<p class="text-xs text-tertiary font-medium mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                        +4.2% yield growth
+                    </p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-error transition-all">
+<div class="flex items-center justify-between mb-4">
+<span class="text-on-surface-variant text-sm font-medium">Returns</span>
+<span class="material-symbols-outlined text-error bg-error-container/30 p-2 rounded-lg">keyboard_return</span>
+</div>
+<p class="text-3xl font-bold font-headline sku-data">14</p>
+<p class="text-xs text-error font-medium mt-2">2.1% of total volume</p>
+</div>
+</div>
+<!-- Filters & Data Table Container -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<!-- Filters Bar -->
+<div class="p-6 border-b border-surface-variant/30 flex flex-wrap items-center justify-between gap-4">
+<div class="flex flex-wrap items-center gap-3">
+<div class="relative">
+<select class="appearance-none bg-surface-container-low border-none rounded-lg pl-4 pr-10 py-2 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20">
+<option>Status: All Orders</option>
+<option>Status: Shipped</option>
+<option>Status: Processing</option>
+<option>Status: Unfulfilled</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-surface-container-low border-none rounded-lg pl-4 pr-10 py-2 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20">
+<option>Date: Last 30 Days</option>
+<option>Date: This Quarter</option>
+<option>Date: Custom Range</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-[18px]">calendar_today</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-surface-container-low border-none rounded-lg pl-4 pr-10 py-2 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20">
+<option>Segment: All Tiers</option>
+<option>Segment: Premium</option>
+<option>Segment: Wholesale</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-[18px]">group</span>
+</div>
+</div>
+<button class="text-primary text-sm font-bold flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-[18px]">filter_alt_off</span>
+                        Clear Filters
+                    </button>
+</div>
+<!-- Orders Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-high">
+<tr>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Order ID</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Customer</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Date</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Total</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Payment</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Fulfillment</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant/20">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<a class="font-bold text-primary hover:text-primary-container sku-data" href="#">#ORD-94281</a>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">EL</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Eleanor Lawrence</p>
+<p class="text-xs text-on-surface-variant">Premium Member</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant sku-data">Oct 14, 2023</td>
+<td class="px-6 py-5 text-sm font-bold text-on-surface sku-data">$1,240.00</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-tertiary-fixed text-on-tertiary-fixed-variant">
+                                        Paid
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-surface-container-highest text-on-surface-variant">
+                                        Shipped
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<a class="font-bold text-primary hover:text-primary-container sku-data" href="#">#ORD-94280</a>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary font-bold text-xs">JB</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Julian Black</p>
+<p class="text-xs text-on-surface-variant">Wholesale</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant sku-data">Oct 14, 2023</td>
+<td class="px-6 py-5 text-sm font-bold text-on-surface sku-data">$8,420.50</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary-fixed text-on-primary-fixed-variant">
+                                        Pending
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-secondary-container text-on-secondary-fixed-variant">
+                                        Processing
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<a class="font-bold text-primary hover:text-primary-container sku-data" href="#">#ORD-94279</a>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant font-bold text-xs">SM</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Sarah Miller</p>
+<p class="text-xs text-on-surface-variant">Guest</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant sku-data">Oct 13, 2023</td>
+<td class="px-6 py-5 text-sm font-bold text-on-surface sku-data">$215.00</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-error-container text-on-error-container">
+                                        Failed
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-error-container text-on-error-container">
+                                        Unfulfilled
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<a class="font-bold text-primary hover:text-primary-container sku-data" href="#">#ORD-94278</a>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">TC</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Thomas Chen</p>
+<p class="text-xs text-on-surface-variant">Premium Member</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant sku-data">Oct 13, 2023</td>
+<td class="px-6 py-5 text-sm font-bold text-on-surface sku-data">$590.00</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-tertiary-fixed text-on-tertiary-fixed-variant">
+                                        Paid
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-surface-container-highest text-on-surface-variant">
+                                        Shipped
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="p-6 border-t border-surface-variant/30 flex items-center justify-between">
+<p class="text-sm text-on-surface-variant">Showing <span class="font-bold text-on-surface">1-4</span> of <span class="font-bold text-on-surface">1,284</span> orders</p>
+<div class="flex gap-2">
+<button class="px-4 py-2 text-sm font-bold text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors disabled:opacity-30" disabled="">Previous</button>
+<div class="flex gap-1">
+<button class="w-9 h-9 flex items-center justify-center rounded-lg bg-primary text-white font-bold text-sm">1</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container-low text-on-surface font-bold text-sm transition-colors">2</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container-low text-on-surface font-bold text-sm transition-colors">3</button>
+<span class="px-2 self-center">...</span>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container-low text-on-surface font-bold text-sm transition-colors">321</button>
+</div>
+<button class="px-4 py-2 text-sm font-bold text-primary hover:bg-primary/5 rounded-lg transition-colors">Next</button>
+</div>
+</div>
+</div>
+<!-- Contextual Insight (Editorial Component) -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative rounded-2xl overflow-hidden min-h-[240px] flex flex-col justify-end p-8 text-white">
+<div class="absolute inset-0 bg-gradient-to-t from-[#1E2D40] to-transparent z-10"></div>
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="Wide angle shot of a clean, organized modern logistics warehouse with tall shelves and automated equipment under cool lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCys1QPEhWzpdc5Rl520Vtx7DMIOOEtcalaJy5IlP6-HXY-FVWcQ-nd7siNbslGUKrOkKc21WwEZtQllScVo8aWMjjBvJaKj5HDP3ge6ChW9TSRx3e6Ygc_SmG-5C25dK0zlVzpbnn0n-maGyxeX7nPwd4QRtPg807cdcLqTlkdE5dOywemDfBeGH3rbj4kwpR1ZWL0ody-sTi5WJ0TnAlrKkHNFrxXbfpQ7JXkbsQxG7cgJQHBNS94MFbvMHDfR9sHzMiDG6Mb4fKK"/>
+<div class="relative z-20">
+<span class="inline-block px-3 py-1 bg-primary-container text-white text-[10px] font-bold uppercase tracking-widest rounded-md mb-3">Efficiency Insight</span>
+<h3 class="text-xl font-bold mb-2">Fulfillment Optimization</h3>
+<p class="text-slate-200 text-sm leading-relaxed max-w-md">Batch orders from the Northeast corridor are currently 12% faster to process. Consider routing additional inventory to the New Jersey hub for seasonal spikes.</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-2xl p-8 flex flex-col justify-center border-none">
+<div class="flex items-start gap-4 mb-6">
+<span class="material-symbols-outlined text-primary text-[40px]" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<div>
+<h3 class="text-xl font-bold text-on-surface">Weekly Demand Forecast</h3>
+<p class="text-on-surface-variant text-sm mt-1">AI-driven prediction based on current order trajectories.</p>
+</div>
+</div>
+<div class="flex gap-1 items-end h-24 mb-6">
+<div class="w-full bg-primary/20 rounded-t-lg h-[40%]"></div>
+<div class="w-full bg-primary/20 rounded-t-lg h-[60%]"></div>
+<div class="w-full bg-primary/20 rounded-t-lg h-[55%]"></div>
+<div class="w-full bg-primary/20 rounded-t-lg h-[75%]"></div>
+<div class="w-full bg-primary/20 rounded-t-lg h-[90%]"></div>
+<div class="w-full bg-primary rounded-t-lg h-[100%]"></div>
+<div class="w-full bg-primary/40 rounded-t-lg h-[85%] border-dashed border-t-2 border-primary"></div>
+</div>
+<div class="flex justify-between text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span class="text-primary">Today</span><span>Sun</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
